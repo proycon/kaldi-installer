@@ -35,7 +35,7 @@ info() {
     echo
 }
 
-while getopt "h?p:gr:b:R:B:nm:" opt; do
+while getopts "h?p:gr:b:R:B:nm:" opt; do
     # shellcheck disable=SC2154
     case "$opt" in
         h|\?)
