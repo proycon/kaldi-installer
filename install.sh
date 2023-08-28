@@ -105,12 +105,17 @@ if [ "$KALDI_NL" -eq 1 ]; then
     cd "$KALDI_ROOT/Kaldi_NL" || die "expected target directory not created"
 
     info "Installing Kaldi_NL"
+    export modelpack="$KALDI_ROOT/Kaldi_NL/models"
     # shellcheck disable=SC2086
-    ./configure $MODELS || die "Kaldi_NL installation failed"
+    ./configure.sh $MODELS || die "Kaldi_NL installation failed"
     cd .. || die "unable to go back"
 fi
 
 info "Installation complete"
 echo "You may want to add the following to your ~/.bashrc and/or ~/.bash_profile:"
 echo "   export KALDI_ROOT=\"$KALDI_ROOT\"" >&2
+if [ "$KALDI_NL" -eq 1 ]; then
+    echo "Kaldi_NL is in $KALDI_ROOT/Kaldi_NL">&2
+    echo "All Kaldi_NL models are under $KALDI_ROOT/Kaldi_NL/models , this is also where you should add your own models">&2
+fi
 echo "Installation completed succesfully! ">&2
